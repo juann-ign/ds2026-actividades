@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto — Juan Atencio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+
+    <header>
+      <h1>Juan Atencio</h1>
+      <p><em>Estudiante de Ingeniería en Sistemas de Información — UTN</em></p>
+    </header>
+
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="estudios.html">Estudios</a>
+      <a href="experiencia.html">Experiencia</a>
+      <a href="hobbies.html">Hobbies</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+
+    <main class="main-form">
+
+      <section class="form-container">
+
+        <h2>¡Trabajemos juntos!</h2>
+        <p>
+          Completá el formulario y nos ponemos en contacto a la brevedad. <br />
+          <em>Los campos con <strong>*</strong> son obligatorios.</em>
+        </p>
+
+        <form class="formulario" action="#" method="post">
+
+          <div class="campo">
+            <label for="nombre">Nombre completo *</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              placeholder="Ej: María González"
+              required
+              minlength="3"
+              maxlength="80"
+              autocomplete="name"
+            />
+            <span class="ayuda">Mínimo 3 caracteres.</span>
+          </div>
+
+          <div class="campo">
+            <label for="email">Correo electrónico *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Ej: mariagonzalez@gmail.com"
+              required
+              autocomplete="email"
+            />
+            <span class="ayuda">Formato válido: usuario@dominio.com</span>
+          </div>
+
+          <div class="campo">
+            <label for="telefono">Teléfono (opcional)</label>
+            <input
+              type="tel"
+              id="telefono"
+              name="telefono"
+              placeholder="Ej: +54 221 3657421"
+              pattern="[\+\d\s\-]{7,20}"
+            />
+            <span class="ayuda">Formato: +54 XXXX XXXXXX (entre 7 y 20 caracteres).</span>
+          </div>
+
+          <div class="campo">
+            <label for="motivo">Motivo *</label>
+            <select id="motivo" name="motivo" required>
+              <option value="">-- Seleccioná un motivo --</option>
+              <option value="trabajo">Propuesta laboral</option>
+              <option value="proyecto">Colaboración en proyecto</option>
+              <option value="academia">Consulta académica</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="mensaje">Mensaje *</label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              rows="5"
+              placeholder="Escribí tu mensaje acá..."
+              required
+              minlength="20"
+              maxlength="1000"
+            ></textarea>
+            <span class="ayuda">Mínimo 20 caracteres, máximo 1000.</span>
+          </div>
+
+          <button type="submit" class="btn-enviar">Enviar mensaje</button>
+
+        </form>
+
+      </section>
+
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Juan Atencio — CV Personal</p>
+    </footer>
+
+  </body>
+</html>
