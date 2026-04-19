@@ -1,4 +1,3 @@
-
 :root {
   --color-primario:     #1a1a2e;
   --color-secundario:   #16213e;
@@ -85,7 +84,6 @@ main {
   width: 100%;
   margin: var(--espacio-l) auto;
   padding: 0 var(--espacio-m);
-
   display: flex;
   flex-direction: row;
   gap: var(--espacio-l);
