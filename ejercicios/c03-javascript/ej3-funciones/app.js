@@ -12,7 +12,7 @@ function calcularPrecioFinal(monto, medioPago) {
     } else if (monto > 400) {
         descuento = 0.40;
     }
-  // Si monto < 200, el descuento queda en 0
+  // Si monto < 200, el descuento queda en 0.
 
   return monto - (monto * descuento);
 }
