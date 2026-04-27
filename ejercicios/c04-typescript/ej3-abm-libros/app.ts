@@ -7,7 +7,6 @@ interface Libro {
     genero?: string;
 }
 
-// Array con libros de ejemplo
 let catalogo: Libro[] = [
     { isbn: "001", titulo: "El nombre del viento", autor: "Patrick Rothfuss", precio: 2500, disponible: true, genero: "Fantasía" },
     { isbn: "002", titulo: "Sapiens", autor: "Yuval Noah Harari", precio: 3200, disponible: false, genero: "Historia" },
@@ -102,7 +101,6 @@ function validarFormulario(): Libro | null {
     };
 }
 
-// Handler del botón Agregar
 document.getElementById("btnAgregar")!.addEventListener("click", function () {
     const errorForm = document.getElementById("errorForm") as HTMLParagraphElement;
     errorForm.textContent = "";
@@ -114,7 +112,6 @@ document.getElementById("btnAgregar")!.addEventListener("click", function () {
         return;
     }
 
-    // Limpiamos el formulario
     (document.getElementById("fTitulo") as HTMLInputElement).value = "";
     (document.getElementById("fAutor") as HTMLInputElement).value = "";
     (document.getElementById("fPrecio") as HTMLInputElement).value = "";
