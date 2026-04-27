@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABM de libros</title>
+</head>
+<body>
+    <h1>ABM de libros</h1>
+
+    <div>
+        <h2>Agregar libro</h2>
+        <input type="text" id="fTitulo" placeholder="Título">
+        <input type="text" id="fAutor" placeholder="Autor">
+        <input type="number" id="fPrecio" placeholder="Precio">
+        <input type="text" id="fGenero" placeholder="Género (opcional)">
+        <label>
+            <input type="checkbox" id="fDisponible"> Disponible
+        </label>
+        <button id="btnAgregar">Agregar</button>
+        <p id="errorForm" style="color: red;"></p>
+    </div>
+
+    <div id="errorForm">
+        <input type="text" id="filtroAutor" placeholder="Buscar por autor">
+        <button id="filtrar">Filtrar</button>
+        <button id="mostrarDisponibles">Solo disponibles</button>
+        <button id="mostrarTodos">Ver todos</button>
+    </div>
+
+    <ul id="listado"></ul>
+
+    <p id="stats"></p>
+
+    <script src="app.js"></script>
+</body>
+</html>
