@@ -1,0 +1,51 @@
+.navbar-custom {
+  background-color: var(--color-tinta) !important;
+  border-bottom: 3px solid var(--color-dorado);
+  padding: 0.75rem 1.5rem;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+  color: var(--color-crema) !important;
+  font-family: var(--fuente-cuerpo);
+}
+
+.navbar-custom .navbar-brand {
+  font-family: var(--fuente-titulo);
+  font-size: 1.3rem;
+}
+
+.navbar-custom .navbar-brand img {
+  filter: brightness(0) invert(1);
+}
+
+.navbar-custom .nav-link {
+  padding: 0.5rem 1rem !important;
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active {
+  color: var(--color-dorado) !important;
+}
+
+.navbar-custom .navbar-toggler {
+  border-color: var(--color-dorado);
+}
+
+.navbar-custom .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28245%2C240%2C232%2C1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-custom .dropdown-menu {
+  background-color: var(--color-tinta);
+  border: 1px solid var(--color-dorado);
+}
+
+.navbar-custom .dropdown-item {
+  color: var(--color-claro);
+}
+
+.navbar-custom .dropdown-item:hover {
+  background-color: var(--color-dorado);
+  color: var(--color-tinta);
+}

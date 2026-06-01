@@ -1,0 +1,59 @@
+export interface Libro {
+  id: number;
+  titulo: string;
+  autor: string;
+  genero: string;
+  precio: number;
+  imagen: string;
+}
+
+export const libros: Libro[] = [
+  {
+    id: 1,
+    titulo: "Cien años de soledad",
+    autor: "Gabriel García Márquez",
+    genero: "Realismo mágico",
+    precio: 2800,
+    imagen: "https://covers.openlibrary.org/b/olid/OL17228124M-L.jpg",
+  },
+  {
+    id: 2,
+    titulo: "El nombre del viento",
+    autor: "Patrick Rothfuss",
+    genero: "Fantasía épica",
+    precio: 3200,
+    imagen: "https://covers.openlibrary.org/b/olid/OL35632564M-L.jpg",
+  },
+  {
+    id: 3,
+    titulo: "1984",
+    autor: "George Orwell",
+    genero: "Distopía",
+    precio: 1900,
+    imagen: "https://covers.openlibrary.org/b/olid/OL33338961M-L.jpg",
+  },
+  {
+    id: 4,
+    titulo: "El principito",
+    autor: "Antoine de Saint-Exupéry",
+    genero: "Fábula",
+    precio: 1400,
+    imagen: "https://covers.openlibrary.org/b/olid/OL47134272M-L.jpg",
+  },
+  {
+    id: 5,
+    titulo: "Rayuela",
+    autor: "Julio Cortázar",
+    genero: "Literatura experimental",
+    precio: 2600,
+    imagen: "https://covers.openlibrary.org/b/olid/OL37767344M-L.jpg",
+  },
+  {
+    id: 6,
+    titulo: "El alquimista",
+    autor: "Paulo Coelho",
+    genero: "Novela filosófica",
+    precio: 1750,
+    imagen: "https://covers.openlibrary.org/b/olid/OL1103908M-L.jpg",
+  },
+];
