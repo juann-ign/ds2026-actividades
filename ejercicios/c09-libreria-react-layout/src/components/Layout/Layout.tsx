@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { Container } from "react-bootstrap";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../../assets/styles/Layout.css";
@@ -12,7 +11,7 @@ function Layout({ children }: LayoutProps) {
   return (
     <div className="layout">
       <Header />
-      <Container className="main-content">{children}</Container>
+      <main className="main-content">{children}</main>
       <Footer />
     </div>
   );

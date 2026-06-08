@@ -1,5 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
-import "./Footer.css";
+import { Link } from "react-router-dom";
+import "../../assets/styles/Footer.css";
 
 export default function Footer() {
   return (
@@ -26,13 +27,13 @@ export default function Footer() {
             <h6 className="footer-titulo-seccion">Navegación</h6>
             <ul className="list-unstyled mt-2">
               <li>
-                <a href="/">Inicio</a>
+                <Link to="/">Inicio</Link>
               </li>
               <li>
-                <a href="#catalogo">Catálogo</a>
+                <Link to="/catalogo">Catálogo</Link>
               </li>
               <li>
-                <a href="#contacto">Contacto</a>
+                <Link to="/contacto">Nosotros</Link>
               </li>
             </ul>
           </Col>

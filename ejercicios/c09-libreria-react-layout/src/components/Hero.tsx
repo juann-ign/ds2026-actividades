@@ -1,5 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { libros } from "../types/Libro";
+import { Link } from "react-router-dom";
+import "../assets/styles/Hero.css";
 
 export default function Hero() {
   const libroDestacado = libros[4];
@@ -9,18 +11,7 @@ export default function Hero() {
       <Container>
         <Row className="align-items-center">
           <Col lg={7}>
-            <p
-              style={{
-                color: "var(--color-dorado)",
-                letterSpacing: "3px",
-                fontSize: "0.8rem",
-                textTransform: "uppercase",
-                fontWeight: 700,
-                marginBottom: "1rem",
-              }}
-            >
-              Bienvenido a nuestra librería
-            </p>
+            <p className="hero-bienvenida">Bienvenido a nuestra librería</p>
             <h1 className="display-titulo">
               Donde cada libro
               <br />
@@ -32,9 +23,9 @@ export default function Hero() {
               Descubrí nuestra selección cuidada de títulos en todos los
               géneros.
             </p>
-            <a href="#destacados" className="btn btn-libreria btn-lg">
+            <Link to="/catalogo" className="btn btn-libreria btn-lg">
               Ver catálogo
-            </a>
+            </Link>
           </Col>
 
           <Col

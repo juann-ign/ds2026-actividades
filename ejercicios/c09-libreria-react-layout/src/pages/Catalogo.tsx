@@ -1,22 +1,20 @@
 import { Container, Row, Col } from "react-bootstrap";
+import LibroCard from "../components/LibroCard";
 import { libros } from "../types/Libro";
-import LibroCard from "./LibroCard";
 import "../assets/styles/Destacados.css";
 
-export default function SeccionDestacados() {
+export default function Catalogo() {
   return (
-    <section className="seccion-destacados" id="destacados">
+    <section className="seccion-destacados">
       <Container>
         <Row className="mb-5">
           <Col className="text-center">
-            <h2 className="seccion-titulo">Destacados del mes</h2>
+            <h2 className="seccion-titulo">Catálogo completo</h2>
             <p className="seccion-subtitulo">
-              Una selección especial de los títulos más celebrados por nuestra
-              comunidad lectora.
+              Explorá todos los títulos disponibles en nuestra librería.
             </p>
           </Col>
         </Row>
-
         <Row className="g-4">
           {libros.map((libro) => (
             <Col key={libro.id} xs={12} md={6} lg={4}>

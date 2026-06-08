@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import type { Libro } from "../types/Libro";
+import "../assets/styles/LibroCard.css";
 
 type Props = {
   libro: Libro;
@@ -25,35 +27,26 @@ export default function LibroCard({ libro }: Props) {
         <Card.Title>{libro.titulo}</Card.Title>
         <Card.Subtitle className="mb-2">{libro.autor}</Card.Subtitle>
 
-        <div
-          className="d-flex justify-content-between align-items-center mt-auto pt-3"
-          style={{ borderTop: "1px solid #eee" }}
-        >
-          <span
-            style={{
-              fontFamily: "var(--fuente-titulo)",
-              fontSize: "1.1rem",
-              color: "var(--color-acento)",
-            }}
-          >
+        <div className="d-flex justify-content-between align-items-center mt-auto pt-3 card-libro-divisor">
+          <span className="card-libro-precio">
             ${libro.precio.toLocaleString("es-AR")}
           </span>
 
           <div className="d-flex gap-2">
             <button
-              className="btn btn-sm"
-              style={{
-                background: "none",
-                border: "1px solid #eee",
-                fontSize: "1rem",
-              }}
+              className="btn btn-sm btn-megusta"
               onClick={() => setMeGusta(!meGusta)}
               title={meGusta ? "Quitar me gusta" : "Me gusta"}
             >
               {meGusta ? "❤️" : "🤍"}
             </button>
 
-            <button className="btn btn-libreria btn-sm">Ver más</button>
+            <Link
+              to={`/libros/${libro.id}`}
+              className="btn btn-libreria btn-sm"
+            >
+              Ver más
+            </Link>
           </div>
         </div>
       </Card.Body>

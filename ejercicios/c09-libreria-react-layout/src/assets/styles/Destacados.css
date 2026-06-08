@@ -1,0 +1,16 @@
+.seccion-destacados {
+  padding: 4rem 0;
+  background-color: var(--color-crema);
+}
+
+.seccion-titulo {
+  font-family: var(--fuente-titulo);
+  font-size: 2rem;
+  color: var(--color-tinta);
+}
+
+.seccion-subtitulo {
+  color: #666;
+  max-width: 500px;
+  margin: 1rem auto 0;
+}

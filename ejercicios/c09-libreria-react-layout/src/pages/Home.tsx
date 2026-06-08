@@ -1,16 +1,11 @@
-import "../App.css";
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
+import "../assets/styles/Home.css";
 import SeccionDestacados from "../components/SeccionDestacados";
-import Footer from "../components/Footer";
-
-export default function App() {
+import Hero from "../components/Hero";
+export default function Home() {
   return (
     <>
-      <Navbar />
       <Hero />
       <SeccionDestacados />
-      <Footer />
     </>
   );
 }
