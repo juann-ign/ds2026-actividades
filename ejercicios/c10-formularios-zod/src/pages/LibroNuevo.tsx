@@ -81,7 +81,7 @@ function LibroNuevo({ onAgregar }: Props) {
           value={categoriaSeleccionada}
           onChange={(e) => {
             setCategoriaSeleccionada(e.target.value as Categoria);
-            setValue("genero", "", { shouldValidate: true }); // resetear género al cambiar categoría
+            setValue("genero", "", { shouldValidate: true });
           }}
           className="mb-2"
         >
