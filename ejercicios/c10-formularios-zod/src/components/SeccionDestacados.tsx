@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { librosIniciales as libros } from "../App";
+import { librosIniciales as libros } from "../data/librosIniciales";
 import LibroCard from "./LibroCard";
 import "../assets/styles/Destacados.css";
 

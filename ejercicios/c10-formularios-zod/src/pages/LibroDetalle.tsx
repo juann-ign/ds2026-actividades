@@ -1,24 +1,17 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { librosIniciales as libros } from "../App";
+import { librosIniciales as libros } from "../data/librosIniciales";
 import "../assets/styles/LibroDetalle.css";
 
 export default function LibroDetalle() {
   const { id } = useParams();
-  const libro = libros.find((l) => l.id === Number(id));
+  const libro = libros.find((l) => l.id === id);
   const [descripcion, setDescripcion] = useState<string | null>(null);
-  const [cargando, setCargando] = useState(true);
+  const [cargando, setCargando] = useState(!libro?.descripcion);
 
   useEffect(() => {
     if (!libro) return;
-
-    // Si tiene descripción local, no llamar a la API
-    if (libro.descripcion) {
-      setCargando(false);
-      return;
-    }
-
-    setCargando(true);
+    if (libro.descripcion) return;
 
     const fetchWork = libro.olId
       ? fetch(`https://openlibrary.org/works/${libro.olId}.json`)

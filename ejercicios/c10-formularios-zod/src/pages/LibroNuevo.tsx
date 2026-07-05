@@ -1,114 +1,144 @@
-// pages/LibroNuevo.tsx
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { Libro } from "../types/Libro";
-import { libroSchema } from "../schemas/libroSchema";
+import { libroSchema, type LibroValidado } from "../schemas/libroSchema";
+import { CATEGORIAS, LISTA_CATEGORIAS, type Categoria } from "../data/generos";
 
 const IMG_PLACEHOLDER = "https://placehold.co/300x400?text=Libro";
+
 interface Props {
   onAgregar: (libro: Libro) => void;
 }
 
 function LibroNuevo({ onAgregar }: Props) {
   const navigate = useNavigate();
-  const [form, setForm] = useState({
-    titulo: "",
-    autor: "",
-    precio: "",
-    disponible: true,
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } = useForm<LibroValidado, any, LibroValidado>({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(libroSchema) as any,
+    defaultValues: {
+      titulo: "",
+      autor: "",
+      precio: undefined,
+      genero: undefined,
+      disponible: true,
+    },
   });
-  const [errores, setErrores] = useState<Record<string, string>>({});
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setForm({ ...form, [name]: type === "checkbox" ? checked : value });
-  };
-
-  // ✅ PONER esto
-  const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-
-    const resultado = libroSchema.safeParse({
-      titulo: form.titulo,
-      autor: form.autor,
-      precio: Number(form.precio),
-      disponible: form.disponible,
-    });
-
-    if (!resultado.success) {
-      const err: Record<string, string> = {};
-      for (const issue of resultado.error.issues) {
-        const campo = issue.path[0] as string;
-        err[campo] = issue.message;
-      }
-      setErrores(err);
-      return;
-    }
-
+  const onSubmit = (data: LibroValidado) => {
     onAgregar({
-      id: Date.now(),
-      titulo: resultado.data.titulo,
-      autor: resultado.data.autor,
-      genero: "Sin clasificar",
-      precio: resultado.data.precio,
+      id: crypto.randomUUID(),
+      titulo: data.titulo,
+      autor: data.autor,
+      genero: data.genero,
+      precio: data.precio,
       imagen: IMG_PLACEHOLDER,
-      disponible: resultado.data.disponible,
+      disponible: data.disponible,
     });
+
     navigate("/catalogo");
   };
 
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<
+    Categoria | ""
+  >("");
+
   return (
     <Form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className="container py-4"
       style={{ maxWidth: 480 }}
     >
       <h2>Nuevo libro </h2>
       <Form.Group className="mb-3">
         <Form.Label>Título</Form.Label>
-        <Form.Control
-          name="titulo"
-          value={form.titulo}
-          onChange={handleChange}
-          isInvalid={!!errores.titulo}
-        />
+        <Form.Control {...register("titulo")} isInvalid={!!errors.titulo} />
         <Form.Control.Feedback type="invalid">
-          {errores.titulo}
+          {errors.titulo?.message}
         </Form.Control.Feedback>
       </Form.Group>
+
       <Form.Group className="mb-3">
         <Form.Label>Autor</Form.Label>
-        <Form.Control
-          name="autor"
-          value={form.autor}
-          onChange={handleChange}
-          isInvalid={!!errores.autor}
-        />
+        <Form.Control {...register("autor")} isInvalid={!!errors.autor} />
         <Form.Control.Feedback type="invalid">
-          {errores.autor}
+          {errors.autor?.message}
         </Form.Control.Feedback>
       </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Categoría</Form.Label>
+        <Form.Select
+          value={categoriaSeleccionada}
+          onChange={(e) => {
+            setCategoriaSeleccionada(e.target.value as Categoria);
+            setValue("genero", "", { shouldValidate: true }); // resetear género al cambiar categoría
+          }}
+          className="mb-2"
+        >
+          <option value="" disabled>
+            Seleccioná una categoría
+          </option>
+          {LISTA_CATEGORIAS.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </Form.Select>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Género</Form.Label>
+        <Form.Select
+          isInvalid={!!errors.genero}
+          defaultValue=""
+          disabled={!categoriaSeleccionada} // bloqueado hasta elegir categoría
+          onChange={(e) =>
+            setValue("genero", e.target.value, { shouldValidate: true })
+          }
+        >
+          <option value="" disabled>
+            {categoriaSeleccionada
+              ? "Seleccioná un género"
+              : "Primero elegí una categoría"}
+          </option>
+          {categoriaSeleccionada &&
+            CATEGORIAS[categoriaSeleccionada].map((g) => (
+              <option key={g} value={g}>
+                {g}
+              </option>
+            ))}
+        </Form.Select>
+        <Form.Control.Feedback type="invalid">
+          {errors.genero?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
       <Form.Group className="mb-3">
         <Form.Label>Precio</Form.Label>
         <Form.Control
           type="number"
-          name="precio"
-          value={form.precio}
-          onChange={handleChange}
-          isInvalid={!!errores.precio}
+          placeholder="Ej: 10000"
+          {...register("precio")}
+          isInvalid={!!errors.precio}
         />
         <Form.Control.Feedback type="invalid">
-          {errores.precio}
+          {errors.precio?.message}
         </Form.Control.Feedback>
       </Form.Group>
       <Form.Check
         type="checkbox"
         className="mb-3"
         label="Disponible"
-        name="disponible"
-        checked={form.disponible}
-        onChange={handleChange}
+        {...register("disponible")}
       />
       <Button type="submit">Agregar libro </Button>
     </Form>

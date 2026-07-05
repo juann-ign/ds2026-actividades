@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { librosIniciales as libros } from "../App";
+import { librosIniciales as libros } from "../data/librosIniciales";
 import { Link } from "react-router-dom";
 import "../assets/styles/Hero.css";
 
