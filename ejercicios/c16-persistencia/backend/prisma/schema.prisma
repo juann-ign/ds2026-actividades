@@ -1,0 +1,29 @@
+generator client {
+ provider = "prisma-client" // ← Prisma 7. NO "prisma-client-js"
+ output = "../src/generated/prisma"
+}
+
+datasource db {
+ provider = "postgresql"
+}
+
+model Libro {
+  id         Int     @id @default(autoincrement())
+  titulo     String
+  autor      String    
+  genero     String    
+  precio     Int
+  imagen     String
+  descripcion String?
+  olId String? 
+  disponible Boolean @default(true)
+  isbn    String?   // <-- Agregamos este campo opcional
+}
+
+
+model Autor {
+  id           Int    @id @default(autoincrement())
+  nombre       String @unique
+  nacionalidad String
+  nacimiento Int
+}

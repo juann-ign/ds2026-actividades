@@ -1,0 +1,77 @@
+.detalle-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.detalle-volver {
+  color: var(--color-acento);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+.detalle-volver:hover {
+  color: var(--color-dorado);
+}
+
+.detalle-contenido {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.detalle-imagen {
+  width: 200px;
+  border-radius: 8px;
+  box-shadow: -8px 8px 24px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.detalle-info {
+  flex: 1;
+}
+
+.detalle-titulo {
+  font-family: var(--fuente-titulo);
+  color: var(--color-tinta);
+  margin-top: 0.5rem;
+  font-size: 2rem;
+}
+
+.detalle-autor {
+  color: var(--color-acento);
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.detalle-precio {
+  font-family: var(--fuente-titulo);
+  font-size: 1.5rem;
+  color: var(--color-acento);
+  font-weight: 700;
+}
+
+.detalle-descripcion {
+  margin-top: 1.5rem;
+  color: var(--color-tinta);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.detalle-cargando {
+  color: #999;
+  font-style: italic;
+}
+
+.detalle-sin-desc {
+  color: #999;
+  font-style: italic;
+}
+
+.detalle-notfound {
+  text-align: center;
+  padding: 4rem;
+}

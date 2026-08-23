@@ -1,0 +1,55 @@
+.card-libro {
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  height: 100%;
+  background-color: white;
+}
+
+.card-libro:hover {
+  transform: translateY(-6px);
+}
+
+.card-libro .card-img-top {
+  height: 320px;
+  object-fit: cover;
+  object-position: center 5%;
+}
+
+.card-libro .card-title {
+  font-family: var(--fuente-titulo);
+  color: var(--color-tinta);
+}
+
+.card-libro .card-subtitle {
+  color: var(--color-acento) !important;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.badge-genero {
+  background-color: var(--color-dorado);
+  color: var(--color-tinta);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.card-libro-divisor {
+  border-top: 1px solid #eee;
+}
+
+.card-libro-precio {
+  font-family: var(--fuente-titulo);
+  font-size: 1.1rem;
+  color: var(--color-acento);
+}
+
+.btn-megusta {
+  background: none;
+  border: 1px solid #eee;
+  font-size: 1rem;
+}
