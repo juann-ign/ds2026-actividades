@@ -6,9 +6,7 @@ import {
   autorCreateSchema,
   autorUpdateSchema,
 } from "../validations/autor.validation";
-import { libroCreateSchema } from "../validations/libro.validation";
 import { authenticate, authorize } from "../middlewares/auth.middleware";
-import { isArgumentsObject } from "node:util/types";
 
 const router = Router();
 

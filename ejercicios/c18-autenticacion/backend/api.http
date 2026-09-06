@@ -11,7 +11,6 @@ GET {{baseUrl}}/api/libros
 ### Obtener un libro específico (ID 2)
 GET {{baseUrl}}/api/libros/2
 
-
 ### ---------------------REGISTRO---------------------------
 
 ### Registro -> 201
@@ -35,16 +34,6 @@ Content-Type: application/json
 
 ### ---------------------LOGIN---------------------------
 
-### Login ← el @name es lo que permite capturar la respuesta -> 200
-# @name login
-POST {{baseUrl}}/api/auth/login
-Content-Type: application/json
-
-{ "email": "ana@libreria.test", "password": "Libreria2026" }
-
-### Guardamos el token de la respuesta anterior
-@token = {{login.response.body.token}}
-
 ### Login con mail que no existe → 401 
 POST {{baseUrl}}/api/auth/login
 Content-Type: application/json
@@ -56,6 +45,17 @@ POST {{baseUrl}}/api/auth/login
 Content-Type: application/json
 
 { "email": "ana@libreria.test", "password": "incorrect4" }
+
+### Login ← el @name es lo que permite capturar la respuesta -> 200
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "ana@libreria.test", "password": "Libreria2026" }
+
+### Guardamos el token de la respuesta anterior
+@token = {{login.response.body.token}}
+
 
 ### Login de ADMIN (del seed) → 200 
 # @name loginAdmin
@@ -73,9 +73,56 @@ Content-Type: application/json
 ### /auth/yo sin token -> 401
 GET {{baseUrl}}/api/auth/yo
 
-### 8 · /auth/yo con token de CLIENTE → 200
+### /auth/yo con token de CLIENTE → 200
 GET {{baseUrl}}/api/auth/yo
 Authorization: Bearer {{token}}
+
+### libro sin header → 401
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{ "titulo": "Rayuela", "precio": 7000, "imagen": "https://…", "autorId": 1 }
+
+### Crear libro con token de Cliente → 403
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{ "titulo": "Rayuela", "precio": 7000, "imagen": "https://…", "autorId": 1 }
+
+### Crear libro con token de admin → 201
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{ "titulo": "Rayuela", "precio": 7000, "imagen": "https://…", "autorId": 1 }
+
+
+### admin con body inválido → 400
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{ "precio": -5 }
+
+### 13 · Borrar libro con token de CLIENTE → 403
+DELETE {{baseUrl}}/api/libros/1
+Authorization: Bearer {{token}}
+
+
+### ──────────────---─ ROMPER EL TOKEN --- ───────────────
+
+### Token con el payload modificado a mano → 401 
+GET {{baseUrl}}/api/auth/yo
+Authorization: Bearer kwrBFO2yDD2bcUw5vuQUTLFOenbjBpGToUrYlvwJ46Z1
+
+### Token que no es un token → 401 
+GET {{baseUrl}}/api/auth/yo
+Authorization: Bearer this is not a token
+
+### Header sin el prefijo Bearer → 401
+GET {{baseUrl}}/api/auth/yo
+Authorization: {{token}}
 
 
 
@@ -151,6 +198,7 @@ GET {{baseUrl}}/api/libros/999
 ### Error 400 - crear un libro sin título
 POST {{baseUrl}}/api/libros
 Content-Type: application/json
+
 { "precio": 5000, "imagen": "https://…", "autorId": 1 }
 
 ### Error 400 - libro con id inválido
@@ -159,10 +207,12 @@ GET {{baseUrl}}/api/libros/abc
 ### Error 400 - el autor no existe (formato válido, dato imposible)
 POST {{baseUrl}}/api/libros
 Content-Type: application/json
+
 { "titulo": "Huérfano", "precio": 5000, "imagen": "https://…", "autorId": 9999 }
 
 ### Rrror 409 - crear un autor duplicado
 POST {{baseUrl}}/api/autores
+
 { "nombre": "Gabriel García Márquez", "nacionalidad": "Colombia", "nacimiento": 1927 }
 
 ### Error 409 - borrar un autor con libros (onDelete: Restrict)
