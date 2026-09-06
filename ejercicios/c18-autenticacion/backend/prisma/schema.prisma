@@ -48,5 +48,3 @@ model Usuario {
   rol          Rol      @default(CLIENTE)
   creadoEn     DateTime @default(now())
 }
-
-
