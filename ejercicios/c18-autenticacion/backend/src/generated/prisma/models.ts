@@ -11,4 +11,5 @@
 export type * from './models/Autor'
 export type * from './models/Libro'
 export type * from './models/Categoria'
+export type * from './models/Usuario'
 export type * from './commonInputTypes'

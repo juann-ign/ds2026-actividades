@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Autor: 'Autor',
   Libro: 'Libro',
-  Categoria: 'Categoria'
+  Categoria: 'Categoria',
+  Usuario: 'Usuario'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -103,6 +104,18 @@ export const CategoriaScalarFieldEnum = {
 } as const
 
 export type CategoriaScalarFieldEnum = (typeof CategoriaScalarFieldEnum)[keyof typeof CategoriaScalarFieldEnum]
+
+
+export const UsuarioScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  passwordHash: 'passwordHash',
+  nombre: 'nombre',
+  rol: 'rol',
+  creadoEn: 'creadoEn'
+} as const
+
+export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
 
 
 export const SortOrder = {
