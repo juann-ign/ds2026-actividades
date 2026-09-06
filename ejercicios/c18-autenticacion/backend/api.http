@@ -191,10 +191,6 @@ Content-Type: application/json
 DELETE {{baseUrl}}/api/autores/2
 
 
-### ERROREs
-### Error 404: Intentar ver un libro que no existe
-GET {{baseUrl}}/api/libros/999
-
 ### Error 400 - crear un libro sin título
 POST {{baseUrl}}/api/libros
 Content-Type: application/json
