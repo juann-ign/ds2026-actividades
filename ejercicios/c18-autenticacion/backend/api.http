@@ -11,6 +11,74 @@ GET {{baseUrl}}/api/libros
 ### Obtener un libro específico (ID 2)
 GET {{baseUrl}}/api/libros/2
 
+
+### ---------------------REGISTRO---------------------------
+
+### Registro -> 201
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{ "nombre": "Ana", "email": "ana@libreria.test", "password": "Libreria2026" }
+
+### Registro con el mismo mail -> 409
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{ "nombre": "Ana", "email": "ana@libreria.test", "password": "Libreria2026" }
+
+### Registro con datos inválidos → 400 
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{ "nombre": "", "email": "no-es-1-mail", "password": "aaaj" }
+
+
+### ---------------------LOGIN---------------------------
+
+### Login ← el @name es lo que permite capturar la respuesta -> 200
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "ana@libreria.test", "password": "Libreria2026" }
+
+### Guardamos el token de la respuesta anterior
+@token = {{login.response.body.token}}
+
+### Login con mail que no existe → 401 
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "nobody@libreria.test", "password": "Libreria2026" }
+
+### Login con password incorrecta → 401
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "ana@libreria.test", "password": "incorrect4" }
+
+### Login de ADMIN (del seed) → 200 
+# @name loginAdmin
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "admin@libreria.test", "password": "Admin1234" }
+
+### El token queda guardado
+@tokenAdmin = {{loginAdmin.response.body.token}}
+
+
+### ---------------------Rutas Protegidas---------------------------
+
+### /auth/yo sin token -> 401
+GET {{baseUrl}}/api/auth/yo
+
+### 8 · /auth/yo con token de CLIENTE → 200
+GET {{baseUrl}}/api/auth/yo
+Authorization: Bearer {{token}}
+
+
+
 ### Listado de solo los disponibles
 GET {{baseUrl}}/api/libros?disponible=true
 
