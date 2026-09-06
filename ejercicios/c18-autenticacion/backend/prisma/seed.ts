@@ -1,4 +1,5 @@
 import { prisma } from "../src/config/prisma";
+import bcrypt from "bcrypt";
 
 const categorias = [
   { nombre: "Novela" },
@@ -168,17 +169,43 @@ const libros = [
   },
 ];
 
+const usuarios = [
+  {
+    email: "admin@libreria.test",
+    nombre: "Admin",
+    rol: "ADMIN" as const,
+    password: "Admin1234",
+  },
+  {
+    email: "cliente@libreria.test",
+    nombre: "Cliente",
+    rol: "CLIENTE" as const,
+    password: "Cliente1234",
+  },
+];
+
 async function main() {
-  await prisma.autor.createMany({ data: autores });
-  await prisma.categoria.createMany({ data: categorias });
+  await prisma.autor.createMany({ data: autores, skipDuplicates: true });
+  await prisma.categoria.createMany({ data: categorias, skipDuplicates: true });
 
   for (const { autor, cat, ...datos } of libros) {
+    const existe = await prisma.libro.findFirst({
+      where: { titulo: datos.titulo },
+    });
+    if (existe) continue;
     await prisma.libro.create({
       data: {
         ...datos,
         autor: { connect: { nombre: autor } },
         categorias: { connect: cat.map((nombre) => ({ nombre })) },
       },
+    });
+  }
+  for (const { password, ...datos } of usuarios) {
+    await prisma.usuario.upsert({
+      where: { email: datos.email },
+      update: {},
+      create: { ...datos, passwordHash: await bcrypt.hash(password, 10) },
     });
   }
 }
