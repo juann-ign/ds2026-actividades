@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap");
+
+:root {
+  --color-crema: #f5f0e8;
+  --color-tinta: #2c1810;
+  --color-acento: #5c7a4e;
+  --color-dorado: #d4a853;
+  --color-claro: #ede7d9;
+  --fuente-titulo: "Playfair Display", Georgia, serif;
+  --fuente-cuerpo: "Lato", Arial, sans-serif;
+}
+
+body {
+  font-family: var(--fuente-cuerpo);
+  background-color: var(--color-crema);
+  color: var(--color-tinta);
+  margin: 0;
+}
