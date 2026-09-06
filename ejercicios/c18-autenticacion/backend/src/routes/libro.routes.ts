@@ -6,17 +6,32 @@ import {
   libroCreateSchema,
   libroUpdateSchema,
 } from "../validations/libro.validation";
+import { authenticate, authorize } from "../middlewares/auth.middleware";
 
 const router = Router();
 router.get("/", libroController.getAll);
 router.get("/:id", validateParams(idParamSchema), libroController.getById);
-router.post("/", validate(libroCreateSchema), libroController.create);
+router.post(
+  "/",
+  authenticate,
+  authorize("ADMIN"),
+  validate(libroCreateSchema),
+  libroController.create,
+);
 router.put(
   "/:id",
+  authenticate,
+  authorize("ADMIN"),
   validate(libroUpdateSchema),
   validateParams(idParamSchema),
   libroController.update,
 );
-router.delete("/:id", validateParams(idParamSchema), libroController.remove);
+router.delete(
+  "/:id",
+  authenticate,
+  authorize("ADMIN"),
+  validateParams(idParamSchema),
+  libroController.remove,
+);
 
 export default router;

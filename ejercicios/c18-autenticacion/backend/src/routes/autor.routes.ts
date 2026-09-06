@@ -7,18 +7,34 @@ import {
   autorUpdateSchema,
 } from "../validations/autor.validation";
 import { libroCreateSchema } from "../validations/libro.validation";
+import { authenticate, authorize } from "../middlewares/auth.middleware";
+import { isArgumentsObject } from "node:util/types";
 
 const router = Router();
 
 router.get("/", autorController.getAll);
 router.get("/:id", validateParams(idParamSchema), autorController.getById);
-router.post("/", validate(autorCreateSchema), autorController.create);
+router.post(
+  "/",
+  authenticate,
+  authorize("ADMIN"),
+  validate(autorCreateSchema),
+  autorController.create,
+);
 router.put(
   "/:id",
+  authenticate,
+  authorize("ADMIN"),
   validateParams(idParamSchema),
   validate(autorCreateSchema),
   autorController.update,
 );
-router.delete("/:id", validateParams(idParamSchema), autorController.remove);
+router.delete(
+  "/:id",
+  authenticate,
+  authorize("ADMIN"),
+  validateParams(idParamSchema),
+  autorController.remove,
+);
 
 export default router;
